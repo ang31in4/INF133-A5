@@ -1,0 +1,26 @@
+.container-fluid {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.row.full-height {
+    display: flex;
+    flex: 1;
+}
+
+.bg-left-column {
+    background-color: #567053;
+    color: white;
+    text-align: center;        
+    padding-top: 3rem;         
+    padding-bottom: 3rem;
+}
+
+.bg-right-column {
+    background-color: #C0BBAA;
+    color: white;
+    text-align: center;        
+    padding-top: 3rem;         
+    padding-bottom: 3rem;
+}
