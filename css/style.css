@@ -24,3 +24,11 @@
     padding-top: 3rem;         
     padding-bottom: 3rem;
 }
+
+.first-row {
+    text-align: center;
+}
+
+.tile {
+    background-color: #567053;
+}
