@@ -34,24 +34,44 @@
     background-color: #567053;
 }
 
-.location-text {
+.location {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     font-size: 30px;
+    text-align: center;
 }
 
-btn-icon {
+.location-btn-icon {
     background-color: transparent;
     border: none; 
-    padding: 0; 
-    cursor: pointer; 
+    padding-right: 15px; 
+    cursor: pointer;
+    display: flex;                 
+    align-items: center;    
+    justify-content: center;    
 }
 
-.btn-icon svg {
+.location-btn-icon svg {
+    align-items: center;
+    justify-content: center;
     width: 32px; 
     height: 32px;
 }
 
-.btn-icon:hover {
+.location-btn-icon:hover {
     opacity: 0.8;
+}
+
+#clock {
+    font-size: 2em;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100%;
+    width: 100%;
+    font-size: 60px;
 }

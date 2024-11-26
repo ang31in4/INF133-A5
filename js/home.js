@@ -30,3 +30,36 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+// Code for time feature
+
+document.addEventListener("DOMContentLoaded", function() {
+    function updateClock() {
+        const clockElement = document.getElementById('clock');
+        const now = new Date();
+
+        // Get current hours, minutes, and seconds
+        let hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+        // Determine AM or PM
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+
+        // Convert 24-hour format to 12-hour format
+        hours = hours % 12;
+        hours = hours ? hours : 12; // 0 becomes 12
+
+        // Format time to always display two digits for minutes and seconds
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
+
+        // Update the clock element
+        clockElement.textContent = formattedTime;
+    }
+
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+
+    // Call updateClock once immediately to avoid delay on page load
+    updateClock();
+});
