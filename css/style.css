@@ -75,3 +75,7 @@
     width: 100%;
     font-size: 60px;
 }
+
+#current-date {
+    font-size: 30px;
+}

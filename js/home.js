@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Code for time feature
-
 document.addEventListener("DOMContentLoaded", function() {
     function updateClock() {
         const clockElement = document.getElementById('clock');
@@ -63,3 +62,28 @@ document.addEventListener("DOMContentLoaded", function() {
     // Call updateClock once immediately to avoid delay on page load
     updateClock();
 });
+
+// Function to get and display the current month and day
+function displayCurrentDate() {
+    const currentDate = new Date();
+
+    // Array of month names
+    const monthNames = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    // Get the current month (0-based index, so we don't need to add 1)
+    const currentMonth = monthNames[currentDate.getMonth()];
+    // Get the current day of the month
+    const currentDay = currentDate.getDate();
+
+    // Format the date string
+    const formattedDate = `${currentMonth} ${currentDay}`;
+
+    // Update the content of the div
+    document.getElementById("current-date").textContent = formattedDate;
+}
+
+// Call the function to display the date when the page loads
+displayCurrentDate();
