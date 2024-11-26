@@ -1,36 +1,3 @@
-// Code for location fetching button
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector(".btn-icon").addEventListener("click", function() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
-
-                // Reverse geocoding using OpenStreetMap's Nominatim API
-                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Retrieve the city and state/province from the address components
-                        var city = data.address.city || data.address.town || data.address.village || "City not found";
-                        var state = data.address.state || data.address.province || "State/Province not found";
-
-                        // Combine city and state for display
-                        document.getElementById("location-text").textContent = `${city}, ${state}`;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching location data:', error);
-                        document.getElementById("location-text").textContent = "Failed to fetch location";
-                    });
-            }, function(error) {
-                console.error('Geolocation error:', error);
-                document.getElementById("location-text").textContent = "Location access denied";
-            });
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-    });
-});
-
 // Code for time feature
 document.addEventListener("DOMContentLoaded", function() {
     function updateClock() {
@@ -87,3 +54,68 @@ function displayCurrentDate() {
 
 // Call the function to display the date when the page loads
 displayCurrentDate();
+
+// Code for immediate location retrieval when starting website
+document.addEventListener("DOMContentLoaded", function () {
+    // Location Retrieval
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+
+            // Reverse geocoding using OpenStreetMap's Nominatim API
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    // Retrieve the city and state/province from the address components
+                    var city = data.address.city || data.address.town || data.address.village || "City not found";
+                    var state = data.address.state || data.address.province || "State/Province not found";
+
+                    // Combine city and state for display
+                    document.getElementById("location-text").textContent = `${city}, ${state}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching location data:', error);
+                    document.getElementById("location-text").textContent = "Failed to fetch location";
+                });
+        }, function (error) {
+            console.error('Geolocation error:', error);
+            document.getElementById("location-text").textContent = "Location access denied";
+        });
+    } else {
+        document.getElementById("location-text").textContent = "Geolocation not supported";
+    }
+
+    // Weather Retrieval
+    const apiKey = "562df18821f94a6995e55836242611";
+    const weatherDiv = document.getElementById("weather");
+
+    async function fetchWeather(lat, lon) {
+        try {
+            const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}`;
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error("Failed to fetch weather data.");
+            }
+            const data = await response.json();
+
+            // Extract weather information
+            const temperature = `${data.current.temp_f}°F`;
+            const condition = data.current.condition.text;
+
+            // Update the #weather div
+            weatherDiv.innerHTML = `${temperature}: ${condition}`;
+        } catch (error) {
+            weatherDiv.textContent = `Error: ${error.message}`;
+        }
+    }
+
+    // Fetch weather once geolocation is available
+    navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        fetchWeather(lat, lon);
+    });
+});
+
+
