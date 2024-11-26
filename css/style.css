@@ -9,6 +9,7 @@
     flex: 1;
 }
 
+
 .bg-left-column {
     background-color: #567053;
     color: white;
@@ -31,4 +32,26 @@
 
 .tile {
     background-color: #567053;
+}
+
+.location-text {
+    display: inline-flex;
+    align-items: center;
+    font-size: 30px;
+}
+
+btn-icon {
+    background-color: transparent;
+    border: none; 
+    padding: 0; 
+    cursor: pointer; 
+}
+
+.btn-icon svg {
+    width: 32px; 
+    height: 32px;
+}
+
+.btn-icon:hover {
+    opacity: 0.8;
 }

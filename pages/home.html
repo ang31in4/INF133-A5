@@ -10,13 +10,21 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/home.js" defer></script>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row full-height">
             <div class="col-md-4 bg-left-column">
-                Location
+                <div class="tile p-3 location-text">
+                    <button class="btn btn-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                        </svg>
+                    </button>
+                    <span id="location-text">Irvine, CA</span>
+                </div>
                 <br>
                 Time
                 <br>
