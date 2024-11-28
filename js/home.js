@@ -118,4 +118,109 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+document.addEventListener('DOMContentLoaded', loadTasks);
 
+// Loads tasks from local storage and adds them 
+function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => addTaskToDOM(task.text, task.priority, task.completed));
+}
+
+document.getElementById('addTaskBtn').addEventListener('click', function() {
+    const taskInput = document.getElementById('taskInput');
+    const prioritySelect = document.getElementById('prioritySelect');
+    const taskText = taskInput.value.trim();
+    const priority = prioritySelect.value;
+
+    if (taskText !== '') {
+        addTaskToDOM(taskText, priority);
+        saveTask(taskText, priority);
+        taskInput.value = '';
+    }
+});
+
+document.getElementById('clearAllBtn').addEventListener('click', function() {
+    localStorage.removeItem('tasks');
+    document.getElementById('taskList').innerHTML = '';
+});
+
+// Adds a new task with priority high, medium, or low
+function addTaskToDOM(taskText, priority, completed = false) {
+    const list = document.getElementById('taskList');
+    const listItem = document.createElement('li');
+    listItem.className = `list-group-item ${completed ? 'completed' : ''}`;
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = completed;
+    checkbox.addEventListener('change', function() {
+        listItem.classList.toggle('completed');
+        toggleTaskCompletion(taskText);
+    });
+
+    if (completed) {
+        listItem.classList.add('completed');
+    }
+
+    const taskSpan = document.createElement('span');
+    taskSpan.className = 'task-text';
+    taskSpan.textContent = taskText;
+
+    const badge = document.createElement('span');
+    badge.className = `badge bg-${getBadgeClass(priority)} text-dark`;
+    badge.textContent = priority;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'btn-delete';
+
+    //Use Bootstrap icons for trash can icon
+    deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
+    deleteButton.addEventListener('click', function() {
+        listItem.remove();
+        deleteTask(taskText);
+    });
+
+    listItem.appendChild(checkbox);
+    listItem.appendChild(taskSpan);
+    listItem.appendChild(badge);
+    listItem.appendChild(deleteButton);
+    list.appendChild(listItem);
+}
+
+// Returns Bootstrap badges with approriate color
+function getBadgeClass(priority) {
+    switch (priority) {
+        case 'High':
+            return 'danger';
+        case 'Medium':
+            return 'warning';
+        case 'Low':
+            return 'success';
+        default:
+            return 'secondary';
+    }
+}
+
+// Saves a new task to local storage 
+function saveTask(taskText, priority) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.push({ text: taskText, priority: priority, completed: false });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// Toggles the completion status and updates local storage.
+function toggleTaskCompletion(taskText) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const task = tasks.find(t => t.text === taskText);
+    if (task) {
+        task.completed = !task.completed;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+}
+
+// Deletes a task from local storage.
+function deleteTask(taskText) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks = tasks.filter(task => task.text !== taskText);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}

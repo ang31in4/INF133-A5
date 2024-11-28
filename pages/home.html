@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Web Assistant</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/home.js" defer></script>
@@ -38,7 +39,22 @@
                 <div class="row first-row">
                     <div class="col-12 mb-3">
                         <div class="tile p-3 half-height">
-                            Reminders
+                            <div class="container mt-5">
+                                <h2 class="mb-4">To-Do List</h2>
+                                <div class="form-group">
+                                    <input type="text" id="taskInput" class="form-control" placeholder="Add a new task">
+                                </div>
+                                <div class="form-group">
+                                    <select id="prioritySelect" class="form-control">
+                                        <option value="High">High Priority</option>
+                                        <option value="Medium">Medium Priority</option>
+                                        <option value="Low">Low Priority</option>
+                                    </select>
+                                </div>
+                                <button id="addTaskBtn" class="btn btn-primary mb-4">Add Task</button>
+                                <button id="clearAllBtn" class="btn btn-danger mb-4">Clear All Tasks</button>
+                                <ul id="taskList" class="list-group"></ul>
+                            </div>
                         </div>
                     </div>
                 </div>
