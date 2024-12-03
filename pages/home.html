@@ -9,6 +9,7 @@
     <title>Student Web Assistant</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Inclusive Sans' rel='stylesheet'>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/style.css">
     <script src="../js/home.js" defer></script>
@@ -17,7 +18,9 @@
 <body>
     <div class="container-fluid">
         <div class="row full-height">
+            <!-- LEFT COLUMN -->
             <div class="col-md-4 bg-left-column">
+                <!-- LOCATION -->
                 <div class="tile p-3 location">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                         <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
@@ -25,16 +28,23 @@
                     <span id="location-text">Location</span>
                 </div>
                 <br>
-                <div class="tile p-3" id="current-date">
-                    Date
-                </div>
+                <!-- CLOCK -->
                 <div class="tile p-3">
                     <div id="clock">Clock</div>
                 </div>
+                <!-- DATE -->
+                <div class="tile p-3" id="current-date">
+                    <div id="current-date" class="calendar-widget">
+                        <div class="calendar-header" id="calendar-month">Month</div>
+                        <div class="calendar-date" id="calendar-day">Day</div>
+                    </div>
+                </div>
+                <!-- WEATHER -->
                 <div class="tile p-3">
                     <div id="weather">Weather</div>
                 </div>
             </div>
+            <!-- RIGHT COLUMN -->
             <div class="col-md-8 bg-right-column">
                 <div class="row first-row">
                     <div class="col-12 mb-3">

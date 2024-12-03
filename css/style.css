@@ -1,3 +1,7 @@
+body {
+    font-family: 'Inclusive Sans', sans-serif;
+}
+
 .container-fluid {
     height: 100vh;
     display: flex;
@@ -14,7 +18,16 @@
     background-color: #567053;
     color: white;
     text-align: center;
-    padding-top: 3rem;  
+}
+
+.col-md-4.bg-left-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center; 
+    padding-bottom: 3rem; 
 }
 
 .bg-right-column {
@@ -37,9 +50,10 @@
 }
 
 .location {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    font-size: 30px;
+    font-size: 40px;
+    margin: 30px;
 }
 
 .location svg {
@@ -47,12 +61,11 @@
 }
 
 #location-text {
-    display: inline-block;
+    display: flex;
 }
 
 #clock {
     font-size: 2em;
-    font-family: 'Arial', sans-serif;
     font-weight: bold;
     text-align: center;
     display: flex;
@@ -64,16 +77,43 @@
 }
 
 #current-date {
-    font-size: 30px;
+    font-size: 35px;
+}
+
+.calendar-widget {
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+    height: 144px;
+    background-color: #f4f4f4;
+    border: 3px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.calendar-header {
+    background-color:#567053;
+    color: white;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.calendar-date {
+    margin-top: 8px;
+    font-size: 55px;
+    font-weight: bold;
+    color: #333;
 }
 
 #weather {
-    font-size: 24px;
+    font-size: 30px;
 }
 
 .completed {
     text-decoration: line-through;
 }
+
 .badge {
     margin-left: 10px;
     
@@ -82,6 +122,7 @@
     max-width: 600px;
     margin-left: 0;
 }
+
 .list-group-item {
     text-align: left;
     display: flex;
@@ -90,11 +131,13 @@
     color: white;
     border: none;
 }
+
 .task-text {
     display: flex;
     flex-grow: 1;
     margin-left: 10px;
 }
+
 .btn-delete {
     margin-left: 10px;
     color: white;

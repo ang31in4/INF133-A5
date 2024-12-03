@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
         hours = hours ? hours : 12; // 0 becomes 12
 
         // Format time to always display two digits for minutes and seconds
-        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
+        const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${ampm}`;
 
         // Update the clock element
         clockElement.textContent = formattedTime;
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
     updateClock();
 });
 
-// Function to get and display the current month and day
 function displayCurrentDate() {
     const currentDate = new Date();
 
@@ -40,20 +39,17 @@ function displayCurrentDate() {
         "July", "August", "September", "October", "November", "December"
     ];
 
-    // Get the current month (0-based index, so we don't need to add 1)
+    // Get the current month and day
     const currentMonth = monthNames[currentDate.getMonth()];
-    // Get the current day of the month
     const currentDay = currentDate.getDate();
 
-    // Format the date string
-    const formattedDate = `${currentMonth} ${currentDay}`;
-
-    // Update the content of the div
-    document.getElementById("current-date").textContent = formattedDate;
+    // Update the content of the calendar elements
+    document.getElementById("calendar-month").textContent = currentMonth;
+    document.getElementById("calendar-day").textContent = currentDay;
 }
 
 // Call the function to display the date when the page loads
-displayCurrentDate();
+document.addEventListener("DOMContentLoaded", displayCurrentDate);
 
 // Code for immediate location retrieval when starting website
 document.addEventListener("DOMContentLoaded", function () {
