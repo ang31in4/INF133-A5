@@ -37,7 +37,7 @@ body {
 .location {
     display: flex;
     align-items: center;
-    font-size: 40px;
+    font-size: 2.5vw;
     margin: 30px;
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 #clock {
-    font-size: 2em;
+    font-size: 3vw;
     font-weight: bold;
     text-align: center;
     display: flex;
@@ -58,41 +58,37 @@ body {
     align-items: center; 
     height: 100%;
     width: 100%;
-    font-size: 60px;
-}
-
-#current-date {
-    font-size: 35px;
 }
 
 .calendar-widget {
     display: inline-block;
     text-align: center;
-    width: 120px;
-    height: 144px;
+    width: 8vw;
+    height: 9vw;
     background-color: #f4f4f4;
-    border: 3px solid #333;
-    border-radius: 10px;
+    border: 5px solid #333;
+    border-radius: 10px; 
     overflow: hidden;
+    box-sizing: border-box; 
 }
 
 .calendar-header {
-    background-color:#567053;
+    background-color: #567053;
     color: white;
-    padding: 5px 0;
-    font-size: 18px;
+    padding: 0.5vw 0; 
+    font-size: 1.125vw;
     font-weight: bold;
 }
 
 .calendar-date {
-    margin-top: 8px;
-    font-size: 55px;
+    margin-top: 0.25vw;
+    font-size: 3.5vw; 
     font-weight: bold;
     color: #333;
 }
 
 #weather {
-    font-size: 30px;
+    font-size: 1.5vw;
 }
 
 /* RIGHT COLUMN */
