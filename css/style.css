@@ -13,6 +13,7 @@ body {
     display: flex;
     flex: 1;
 }
+
 .tile {
     background-color: #567053;
 }
@@ -113,6 +114,22 @@ body {
     border-radius: 10px;
 }
 
+/* # TO-DO LIST */
+
+.tile {
+    position: relative;
+    
+}
+
+.tile .title {
+    position: absolute; 
+    top: 0.75rem;             
+    left: 2rem;            
+    transform: translate(0%, 50%);
+    margin: 0rem;
+    font-size: 1.75vw;       
+}
+
 .completed {
     text-decoration: line-through;
 }
@@ -124,6 +141,26 @@ body {
 .container {
     max-width: 600px;
     margin-left: 0;
+}
+
+.left-section {
+    width: 45%;
+    text-align: left;
+}
+
+.right-section {
+    width: 45%;
+    text-align: left;
+    margin-top: 3.5vw;
+    margin-right: 2vw;
+}
+
+.left-section h2 {
+    margin-bottom: 1vw;
+}
+
+.left-section ul {
+    margin-top: 3.5vw;
 }
 
 .list-group-item {
@@ -138,11 +175,12 @@ body {
 .task-text {
     display: flex;
     flex-grow: 1;
-    margin-left: 10px;
+    margin-left: 0.5vw;
+    font-size: 1vw;
 }
 
 .btn-delete {
-    margin-left: 10px;
+    margin-left: 0.5vw;
     color: white;
     background-color: transparent;
     border: none;
