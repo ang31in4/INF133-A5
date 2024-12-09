@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', loadTasks);
 // Loads tasks from local storage and adds them 
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.forEach(task => addTaskToDOM(task.text, task.priority, task.completed));
+    tasks.forEach(task => addTaskToDOM(task.text, task.priority, task.completed, task.type, task.date));
 }
 
 document.getElementById('addTaskBtn').addEventListener('click', function() {
@@ -127,22 +127,26 @@ document.getElementById('addTaskBtn').addEventListener('click', function() {
     const prioritySelect = document.getElementById('prioritySelect');
     const taskText = taskInput.value.trim();
     const priority = prioritySelect.value;
+    const taskType = document.getElementById('taskTypeSelect').value;
+    const date = dateInput.value;
 
     if (taskText !== '') {
-        addTaskToDOM(taskText, priority);
-        saveTask(taskText, priority);
+        addTaskToDOM(taskText, priority, false, taskType, date);
+        saveTask(taskText, priority, taskType, date);
         taskInput.value = '';
+        dateInput.value = '';
     }
 });
 
 document.getElementById('clearAllBtn').addEventListener('click', function() {
     localStorage.removeItem('tasks');
     document.getElementById('taskList').innerHTML = '';
+    document.getElementById('importantDateList').innerHTML = '';
 });
 
 // Adds a new task with priority high, medium, or low
-function addTaskToDOM(taskText, priority, completed = false) {
-    const list = document.getElementById('taskList');
+function addTaskToDOM(taskText, priority, completed = false, type = 'To-Do', date = '') {
+    const list = type === 'To-Do' ? document.getElementById('taskList') : document.getElementById('importantDateList');
     const listItem = document.createElement('li');
     listItem.className = `list-group-item ${completed ? 'completed' : ''}`;
 
@@ -151,33 +155,34 @@ function addTaskToDOM(taskText, priority, completed = false) {
     checkbox.checked = completed;
     checkbox.addEventListener('change', function() {
         listItem.classList.toggle('completed');
-        toggleTaskCompletion(taskText);
+        toggleTaskCompletion(taskText, type);
     });
-
-    if (completed) {
-        listItem.classList.add('completed');
-    }
 
     const taskSpan = document.createElement('span');
     taskSpan.className = 'task-text';
     taskSpan.textContent = taskText;
 
     const badge = document.createElement('span');
-    badge.className = `badge bg-${getBadgeClass(priority)} text-dark`;
+    badge.className = `badge bg-${getBadgeClass(priority)}`;
     badge.textContent = priority;
+
+    const dateSpan = document.createElement('span');
+    dateSpan.className = 'badge bg-info text-dark';
+    dateSpan.textContent = date;
 
     const deleteButton = document.createElement('button');
     deleteButton.className = 'btn-delete';
-
-    //Use Bootstrap icons for trash can icon
     deleteButton.innerHTML = '<i class="bi bi-trash"></i>';
     deleteButton.addEventListener('click', function() {
         listItem.remove();
-        deleteTask(taskText);
+        deleteTask(taskText, type);
     });
 
     listItem.appendChild(checkbox);
     listItem.appendChild(taskSpan);
+    if (type === 'Important Date') {
+        listItem.appendChild(dateSpan);
+    }
     listItem.appendChild(badge);
     listItem.appendChild(deleteButton);
     list.appendChild(listItem);
@@ -198,16 +203,16 @@ function getBadgeClass(priority) {
 }
 
 // Saves a new task to local storage 
-function saveTask(taskText, priority) {
+function saveTask(taskText, priority, type, date) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.push({ text: taskText, priority: priority, completed: false });
+    tasks.push({ text: taskText, priority: priority, completed: false, type: type, date: date });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 // Toggles the completion status and updates local storage.
-function toggleTaskCompletion(taskText) {
+function toggleTaskCompletion(taskText, type) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const task = tasks.find(t => t.text === taskText);
+    const task = tasks.find(t => t.text === taskText && t.type === type);
     if (task) {
         task.completed = !task.completed;
         localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -215,8 +220,23 @@ function toggleTaskCompletion(taskText) {
 }
 
 // Deletes a task from local storage.
-function deleteTask(taskText) {
+function deleteTask(taskText, type) {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks = tasks.filter(task => task.text !== taskText);
+    tasks = tasks.filter(task => task.text !== taskText || task.type !== type);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
+
+
+// Toggles the date input visibility based on task type selection
+document.getElementById('taskTypeSelect').addEventListener('change', function() {
+    const dateInputGroup = document.getElementById('dateInputGroup');
+    const taskInput = document.getElementById('taskInput');
+    if (this.value === 'Important Date') {
+        dateInputGroup.style.display = 'block';
+        taskInput.placeholder = 'Add a new important date';
+    } else {
+        dateInputGroup.style.display = 'none';
+        taskInput.placeholder = 'Add a new task';
+    }
+});
+

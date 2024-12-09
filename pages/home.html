@@ -63,6 +63,14 @@
                                 <div class="form-group mb-3">
                                     <input type="text" id="taskInput" class="form-control" placeholder="Add a new task">
                                 </div>
+                                <!-- TODO OR IMPORTANT DATES SELECTOR-->
+                                <select id="taskTypeSelect" class="form-control">
+                                    <option value="To-Do">To-Do</option>
+                                    <option value="Important Date">Important Date</option>
+                                </select>
+                                <div class="form-group" id="dateInputGroup" style="display: none;">
+                                    <input type="date" id="dateInput" class="form-control">
+                                </div>
                                 <!-- PRIORITY SELECTOR -->
                                 <div class="form-group mb-3">
                                     <select id="prioritySelect" class="form-control">
@@ -84,7 +92,10 @@
                     <!-- IMPORTANT DATES -->
                     <div class="col-sm-12 col-md-6 offset-md-0 mb-3">
                         <div class="tile p-3 half-height">
-                            Important Dates
+                            <div class="left-section me-auto">
+                                <h2 class="title mb-4">Important Dates</h2>
+                                <ul id="importantDateList" class="list-group"></ul>
+                            </div>
                         </div>
                     </div>
                     <!-- CALENDAR -->
