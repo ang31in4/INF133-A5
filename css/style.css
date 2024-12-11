@@ -186,6 +186,7 @@ body {
     border: none;
 }
 
+<<<<<<< HEAD
 .calendar {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -220,3 +221,5 @@ body {
 .weekDays {
     margin-right: 15px;
 }
+=======
+>>>>>>> refs/remotes/origin/main
