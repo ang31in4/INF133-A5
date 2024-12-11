@@ -240,3 +240,60 @@ document.getElementById('taskTypeSelect').addEventListener('change', function() 
     }
 });
 
+
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+function renderCalendar(month, year) {
+    const firstDay = new Date(year, month).getDay();
+    const daysInMonth = 32 - new Date(year, month, 32).getDate();
+    const calendarDays = document.getElementById('calendarDays');
+    calendarDays.innerHTML = '';
+
+    document.getElementById('monthYear').innerText = `${monthNames[month]} ${year}`;
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+        const weekRow = document.createElement('div');
+        weekRow.className = 'row';
+
+        for (let j = 0; j < 7; j++) {
+            const dayCell = document.createElement('div');
+            dayCell.className = 'col day';
+
+            if (i === 0 && j < firstDay) {
+                dayCell.innerHTML = '';
+            } else if (date > daysInMonth) {
+                break;
+            } else {
+                dayCell.innerHTML = date;
+                date++;
+            }
+
+            weekRow.appendChild(dayCell);
+        }
+
+        calendarDays.appendChild(weekRow);
+    }
+}
+
+document.getElementById('prevMonth').addEventListener('click', function() {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+});
+
+document.getElementById('nextMonth').addEventListener('click', function() {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+});
+
+renderCalendar(currentMonth, currentYear);

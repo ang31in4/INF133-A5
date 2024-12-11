@@ -186,4 +186,37 @@ body {
     border: none;
 }
 
+.calendar {
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+.calendar-header {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
 
+.calendar-body {
+    
+    margin-left: 25px;
+}
+
+.day {
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.day:hover {
+    background-color: #f0f0f0;
+}
+.day-name {
+    font-weight: bold;
+}
+
+.weekDays {
+    margin-right: 15px;
+}
